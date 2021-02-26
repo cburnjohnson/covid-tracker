@@ -32,10 +32,14 @@ const CurrentUsMap = () => {
   useEffect(() => {
     async function getData() {
       const results = await axios.get('https://api.covidtracking.com/v1/states/current.json')
-      setCurrentStatesData(results)
+      let mappedValues = {}
+      results.data.forEach(result => {
+        mappedValues[result.state] = {amountPositive: result.positive}
+      })
+      setCurrentStatesData(mappedValues)
     }
     getData()
-  })
+  }, [])
   
 
   return (
