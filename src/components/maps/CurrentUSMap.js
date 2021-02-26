@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { geoCentroid } from "d3-geo";
 import {
   ComposableMap,
@@ -7,6 +7,7 @@ import {
   Marker,
   Annotation
 } from "react-simple-maps";
+import axios from 'axios'
 
 import allStates from "../../data/allstates.json";
 
@@ -24,7 +25,19 @@ const offsets = {
   DC: [49, 21]
 };
 
-const MapChart = () => {
+
+const CurrentUsMap = () => {
+  const [currentStatesData, setCurrentStatesData] = useState([])
+
+  useEffect(() => {
+    async function getData() {
+      const results = await axios.get('https://api.covidtracking.com/v1/states/current.json')
+      setCurrentStatesData(results)
+    }
+    getData()
+  })
+  
+
   return (
     <ComposableMap projection="geoAlbersUsa">
       <Geographies geography={geoUrl}>
@@ -73,4 +86,4 @@ const MapChart = () => {
   );
 };
 
-export default MapChart;
+export default CurrentUsMap;

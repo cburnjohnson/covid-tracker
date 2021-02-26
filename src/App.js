@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 
-import USMap from './components/maps/USMap'
+import CurrentUSMap from './components/maps/CurrentUSMap'
 
 function App() {
   const [currentUSStats, setCurrentUSStates] = useState({})
@@ -33,7 +33,7 @@ function App() {
         </div>
       </div>
      
-      <USMap />
+      <CurrentUSMap />
     </div>
     
   );
